@@ -186,9 +186,7 @@ public class StockApiController {
 		}
          
 		return getStockBetween;
-		
-		
-		
+		 
 		
 	}
 
