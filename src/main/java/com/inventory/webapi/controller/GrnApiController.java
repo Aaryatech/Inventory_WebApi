@@ -1,5 +1,6 @@
 package com.inventory.webapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.inventory.webapi.model.GrnGvnHeader;
 import com.inventory.webapi.model.GrnGvnDetail;
-import com.inventory.webapi.model.GrnList;
-import com.inventory.webapi.model.ItemUom;
+import com.inventory.webapi.model.GrnList; 
 import com.inventory.webapi.repository.GrnGvnDetailRepository;
 import com.inventory.webapi.repository.GrnGvnHeaderRepository;
 import com.inventory.webapi.repository.GrnListRepository; 
@@ -31,13 +31,14 @@ public class GrnApiController {
 	GrnGvnDetailRepository grnGvnDetailRepository;
 	
 	@RequestMapping(value = { "/getItemFromPurchaseBillForGvn" }, method = RequestMethod.POST)
-	public @ResponseBody GrnList getItemFromPurchaseBillForGvn(@RequestParam ("batchNo") String batchNo,@RequestParam ("suppId")int suppId)
+	public @ResponseBody GrnList getItemFromPurchaseBillForGvn(@RequestParam ("batchNo") String batchNo,@RequestParam ("suppId")int suppId,
+			@RequestParam ("currentDate")String currentDate)
 	{
 		System.out.println("batchNo :"+batchNo); 
 		GrnList getItemFromPurchaseBillForGvn = new GrnList();
 		try {
 			  
-			getItemFromPurchaseBillForGvn = grnListRepository.getItemRecord(batchNo,suppId);
+			getItemFromPurchaseBillForGvn = grnListRepository.getItemRecord(batchNo,suppId,currentDate);
 			if(getItemFromPurchaseBillForGvn==null)
 			{
 				getItemFromPurchaseBillForGvn = new GrnList();
@@ -50,6 +51,26 @@ public class GrnApiController {
         
 		
 		return getItemFromPurchaseBillForGvn;
+
+	}
+	
+	@RequestMapping(value = { "/getallExpireItemSupllierWise" }, method = RequestMethod.POST)
+	public @ResponseBody List<GrnList> getallExpireItemSupllierWise(@RequestParam ("suppId")int suppId, @RequestParam ("currentDate")String currentDate)
+	{ 
+		
+		List<GrnList> getallExpireItemSupllierWise = new ArrayList<GrnList>();
+		try {
+			  
+			getallExpireItemSupllierWise = grnListRepository.getallExpireItemSupllierWise(suppId,currentDate);
+			 
+			System.out.println(getallExpireItemSupllierWise.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return getallExpireItemSupllierWise;
 
 	}
 	

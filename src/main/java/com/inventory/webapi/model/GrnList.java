@@ -15,6 +15,9 @@ public class GrnList {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "pur_detail_id")
+	private int purDetailId; 
+	
 	@Column(name = "purchase_id")
 	private int purchaseId; 
 	
@@ -47,6 +50,17 @@ public class GrnList {
 	
 	@Column(name = "rate_with_tax")
 	private float rateWithTax;
+	
+	@Column(name = "expiry_date")
+	private Date expiryDate;
+
+	public int getPurDetailId() {
+		return purDetailId;
+	}
+
+	public void setPurDetailId(int purDetailId) {
+		this.purDetailId = purDetailId;
+	}
 
 	public int getPurchaseId() {
 		return purchaseId;
@@ -136,12 +150,22 @@ public class GrnList {
 	public void setBatchNo(String batchNo) {
 		this.batchNo = batchNo;
 	}
+	
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
+	}
 
 	@Override
 	public String toString() {
-		return "GrnList [purchaseId=" + purchaseId + ", invoiceNo=" + invoiceNo + ", invDate=" + invDate + ", itemId="
-				+ itemId + ", suppId=" + suppId + ", suppName=" + suppName + ", batchNo=" + batchNo + ", itemName="
-				+ itemName + ", hsnCode=" + hsnCode + ", balance=" + balance + ", rateWithTax=" + rateWithTax + "]";
+		return "GrnList [purDetailId=" + purDetailId + ", purchaseId=" + purchaseId + ", invoiceNo=" + invoiceNo
+				+ ", invDate=" + invDate + ", itemId=" + itemId + ", suppId=" + suppId + ", suppName=" + suppName
+				+ ", batchNo=" + batchNo + ", itemName=" + itemName + ", hsnCode=" + hsnCode + ", balance=" + balance
+				+ ", rateWithTax=" + rateWithTax + ", expiryDate=" + expiryDate + "]";
 	}
 	
 	

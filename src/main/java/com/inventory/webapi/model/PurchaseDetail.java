@@ -1,12 +1,16 @@
 package com.inventory.webapi.model;
  
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "t_purchase_detail")
@@ -117,6 +121,9 @@ public class PurchaseDetail {
 	@Column(name = "del_status")
 	private int delStatus;
 
+	@Column(name = "expiry_date")
+	private Date expiryDate;
+	 
 	public int getPurDetailId() {
 		return purDetailId;
 	}
@@ -388,6 +395,14 @@ public class PurchaseDetail {
 
 	public void setDelStatus(int delStatus) {
 		this.delStatus = delStatus;
+	}
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
+	public Date getExpiryDate() {
+		return expiryDate;
+	}
+
+	public void setExpiryDate(Date expiryDate) {
+		this.expiryDate = expiryDate;
 	}
 
 	@Override
