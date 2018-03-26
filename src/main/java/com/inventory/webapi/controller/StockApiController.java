@@ -176,8 +176,11 @@ public class StockApiController {
 		 
 		List<GetCurrentStock> getStockBetween = new ArrayList<GetCurrentStock>();
 		try {
-			 
-			getStockBetween = getCurrentStockRepository.getStockBetween(fromDate,toDate,catId);
+			 if(catId==0) 
+				 getStockBetween = getCurrentStockRepository.getStockBetween(fromDate,toDate);
+			 else
+				 getStockBetween = getCurrentStockRepository.getStockBetween(fromDate,toDate,catId);
+			
 			
 			  
 		} catch (Exception e) {
