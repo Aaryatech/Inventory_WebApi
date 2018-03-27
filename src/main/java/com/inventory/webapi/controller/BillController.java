@@ -97,6 +97,7 @@ public class BillController {
 			    
 			return billHeaderRes;
 		  }
+
 		@RequestMapping(value = { "/postPurchaseDetails" }, method = RequestMethod.POST)
 		public @ResponseBody Info postPurchaseDetails(@RequestBody List<PurchaseDetail> batchList)
 		{
@@ -127,4 +128,6 @@ public class BillController {
 			}
 			return info;
 		}
+		
+		
 }

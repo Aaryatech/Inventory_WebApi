@@ -15,6 +15,6 @@ public interface TSettingRepository extends JpaRepository<TSetting, Integer>{
 	@Transactional
 	@Modifying
 	@Query(" UPDATE TSetting SET setting_value=:value WHERE setting_key=:key")  
-	int updateValue(@Param("value")int value,@Param("key")String key); 
+	int updateValue(@Param("value")int value,@Param("key")String key);
 
 }

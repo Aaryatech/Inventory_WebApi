@@ -131,7 +131,37 @@ public class PurchaseApiController {
 		return getSettingValueByKey;
 
 	}
-	
+	@RequestMapping(value = { "/getUniqueSettingValue" }, method = RequestMethod.POST)
+	public @ResponseBody TSetting getSettingValue(@RequestParam ("key") String key)
+	{
+		 
+		TSetting getSettingValueByKey = new TSetting();
+		try {
+			  
+			getSettingValueByKey = tSettingRepository.findBySettingKey(key);
+
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return getSettingValueByKey;
+
+	}
+	@RequestMapping(value = { "/updateTsettingKey" }, method = RequestMethod.POST)
+	public @ResponseBody int updateInvoiceKey(@RequestParam ("key") String key,@RequestParam ("value") int value)
+	{
+		int isUpdated=0;
+		try {
+			isUpdated = tSettingRepository.updateValue(value,key);
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+         return isUpdated;
+	}
 	@RequestMapping(value = { "/updateIsGrnInPurchaseDetail" }, method = RequestMethod.POST)
 	public @ResponseBody Info updateIsGrnInPurchaseDetail(@RequestParam ("batchList") List<String> batchList)
 	{
