@@ -3,9 +3,11 @@ package com.inventory.webapi.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.inventory.webapi.model.BillHeader;
 
@@ -27,5 +29,10 @@ public interface BillHeaderRepository extends JpaRepository<BillHeader, Integer>
 
 	@Query(value="select  bill_no, invoice_no, invoice_date, cust_id, cust_name,gstin,cust_type,taxable_amt,tax_amt,grand_total,discount_per,discount_amt,paid_amt,rem_amt, bill_status, remark, expiry_date,cgst_rs,sgst_rs,igst_rs,cess_rs from t_bill_header where bill_status=2 ",nativeQuery=true)
 	List<BillHeader> findUnpaidBills();
+
+	@Transactional
+	@Modifying
+	@Query(" UPDATE BillHeader SET bill_status=1 WHERE bill_no=:billNo")  
+	int updateBillStatus(@Param("billNo")int billNo ); 
 
 }

@@ -22,6 +22,7 @@ import com.inventory.webapi.model.Info;
 import com.inventory.webapi.model.PurchaseDetail;
 import com.inventory.webapi.model.PurchaseHeader;
 import com.inventory.webapi.repository.BillDetailRepository;
+import com.inventory.webapi.repository.BillHeaderRepository;
 import com.inventory.webapi.repository.PurchaseDetailRepository;
 import com.inventory.webapi.repository.PurchaseHeaderRepository;
 import com.inventory.webapi.service.BillService;
@@ -39,6 +40,8 @@ public class BillController {
 	@Autowired
 	PurchaseDetailRepository purchaseDetailRepository;
 	
+	@Autowired
+	BillHeaderRepository billHeaderRepository;
 	@Autowired
 	BillDetailRepository billDetailRepository;
 	//------------------------------------- BILL---------------------------------
@@ -128,6 +131,34 @@ public class BillController {
 			}
 			return info;
 		}
-		
+		@RequestMapping(value = { "/approvedPaidInSaleBill" }, method = RequestMethod.POST)
+		public @ResponseBody  Info approvedPaidInSaleBill(@RequestParam ("billNoList") List<String> billNoList)
+		{
+			Info info = new Info();
+		 
+			try {
+				int update=0;
+				
+				for(int i=0;i<billNoList.size();i++)
+				{
+					int billNo = Integer.parseInt(billNoList.get(i));
+					update = billHeaderRepository.updateBillStatus(billNo);
+				}
+				
+				if(update==0)
+				{
+					info.setError(true);
+					info.setMessage("not update");
+				}
+					
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				info.setError(true);
+				info.setMessage("not update");
+			}
+	         return info;
+		}
+
 		
 }
