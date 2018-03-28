@@ -59,6 +59,9 @@ public class BillHeader implements Serializable{
 	@Column(name = "grand_total")
 	private float grandTotal;
 	
+	@Column(name = "discount_per")
+	private float discountPer;
+	
 	@Column(name = "discount_amt")
 	private float discountAmt;
 	
@@ -81,6 +84,15 @@ public class BillHeader implements Serializable{
 	List<BillDetail> billDetailList;
 	
 	
+	
+	public float getDiscountPer() {
+		return discountPer;
+	}
+
+	public void setDiscountPer(float discountPer) {
+		this.discountPer = discountPer;
+	}
+
 	public float getCgstRs() {
 		return cgstRs;
 	}
@@ -252,12 +264,13 @@ public class BillHeader implements Serializable{
 	@Override
 	public String toString() {
 		return "BillHeader [billNo=" + billNo + ", invoiceNo=" + invoiceNo + ", invoiceDate=" + invoiceDate
-				+ ", custId=" + custId + ", gstin=" + gstin + ", custType=" + custType + ", taxableAmt=" + taxableAmt
-				+ ", taxAmt=" + taxAmt + ", grandTotal=" + grandTotal + ", discountAmt=" + discountAmt + ", paidAmt="
-				+ paidAmt + ", remAmt=" + remAmt + ", billStatus=" + billStatus + ", remark=" + remark + ", expiryDate="
-				+ expiryDate + "]";
+				+ ", custId=" + custId + ", custName=" + custName + ", gstin=" + gstin + ", custType=" + custType
+				+ ", taxableAmt=" + taxableAmt + ", cgstRs=" + cgstRs + ", sgstRs=" + sgstRs + ", igstRs=" + igstRs
+				+ ", cessRs=" + cessRs + ", taxAmt=" + taxAmt + ", grandTotal=" + grandTotal + ", discountPer="
+				+ discountPer + ", discountAmt=" + discountAmt + ", paidAmt=" + paidAmt + ", remAmt=" + remAmt
+				+ ", billStatus=" + billStatus + ", remark=" + remark + ", expiryDate=" + expiryDate
+				+ ", billDetailList=" + billDetailList + "]";
 	}
-	
-	
-	
+
+    
 }

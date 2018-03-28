@@ -48,6 +48,9 @@ public class BillDetail implements Serializable{
 	@Column(name = "taxable_amt")
 	private float taxableAmt; 
 	
+	@Column(name = "disc_amt")
+	private float discAmt; 
+	
 	@Column(name = "value")
 	private float value; 
 	
@@ -82,6 +85,14 @@ public class BillDetail implements Serializable{
 	private float grandTotal;
 
 	
+	public float getDiscAmt() {
+		return discAmt;
+	}
+
+	public void setDiscAmt(float discAmt) {
+		this.discAmt = discAmt;
+	}
+
 	public float getValue() {
 		return value;
 	}
@@ -262,10 +273,12 @@ public class BillDetail implements Serializable{
 	@Override
 	public String toString() {
 		return "BillDetail [billDetailId=" + billDetailId + ", billNo=" + billNo + ", itemId=" + itemId + ", itemName="
-				+ itemName + ", itemHsncd=" + itemHsncd + ", billQty=" + billQty + ", rate=" + rate + ", batch_no="
-				+ batchNo + ", taxableAmt=" + taxableAmt + ", cgstPer=" + cgstPer + ", cgstRs=" + cgstRs + ", sgstPer="
-				+ sgstPer + ", sgstRs=" + sgstRs + ", igstPer=" + igstPer + ", igstRs=" + igstRs + ", cessPer="
-				+ cessPer + ", cessRs=" + cessRs + ", taxAmt=" + taxAmt + ", grandTotal=" + grandTotal + "]";
+				+ itemName + ", itemHsncd=" + itemHsncd + ", itemUom=" + itemUom + ", billQty=" + billQty + ", rate="
+				+ rate + ", baseRate=" + baseRate + ", batchNo=" + batchNo + ", taxableAmt=" + taxableAmt + ", discAmt="
+				+ discAmt + ", value=" + value + ", cgstPer=" + cgstPer + ", cgstRs=" + cgstRs + ", sgstPer=" + sgstPer
+				+ ", sgstRs=" + sgstRs + ", igstPer=" + igstPer + ", igstRs=" + igstRs + ", cessPer=" + cessPer
+				+ ", cessRs=" + cessRs + ", taxAmt=" + taxAmt + ", grandTotal=" + grandTotal + "]";
 	}
-	
+    
+
 }
