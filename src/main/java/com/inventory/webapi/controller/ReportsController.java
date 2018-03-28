@@ -68,4 +68,16 @@ public class ReportsController {
 		}    
 		return billDetails;
 	  }
+	@RequestMapping(value = { "/findUnpaidBills" }, method = RequestMethod.GET)
+	public @ResponseBody List<BillHeader> findUnpaidBills() {
+	
+		List<BillHeader> billHeaders=new ArrayList<>();
+		try {
+		 billHeaders=billHeaderRepository.findUnpaidBills();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}    
+		return billHeaders;
+	  }
 }
