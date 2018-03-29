@@ -32,6 +32,12 @@ public interface PurchaseDetailRepository extends JpaRepository<PurchaseDetail, 
 	@Query(" UPDATE PurchaseDetail SET replace_qty=:totalReplaceQty where batch_no=:batchNo")
 	int updateReplaceQtyInPurchaseBill(@Param("batchNo")String batchNo,@Param("totalReplaceQty") int totalReplaceQty);
 
+	
+	@Transactional
+	@Modifying
+	@Query(" UPDATE PurchaseDetail SET replace_qty=0 where batch_no=:batchNo")
+	int updateReplaceQtyInPurchaseDetail(@Param("batchNo")String batchNo);
+
 	 
 
 }

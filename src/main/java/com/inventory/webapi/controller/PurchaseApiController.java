@@ -170,15 +170,27 @@ public class PurchaseApiController {
          return isUpdated;
 	}
 	@RequestMapping(value = { "/updateIsGrnInPurchaseDetail" }, method = RequestMethod.POST)
-	public @ResponseBody Info updateIsGrnInPurchaseDetail(@RequestParam ("batchList") List<String> batchList)
+	public @ResponseBody Info updateIsGrnInPurchaseDetail(@RequestParam ("grnType") int grnType,@RequestParam ("batchList") List<String> batchList)
 	{
 		int update=0;
 		Info info = new Info();
 		try {
-			  for(int i=0;i<batchList.size();i++)
-			  {
-				  update = purchaseDetailRepository.updateIsGrnInPurchaseDetail(batchList.get(i));
-			  }
+			
+			if(grnType==0)
+			{
+				for(int i=0;i<batchList.size();i++)
+				  {
+					  update = purchaseDetailRepository.updateIsGrnInPurchaseDetail(batchList.get(i));
+				  }
+			}
+			else
+			{
+				for(int i=0;i<batchList.size();i++)
+				  {
+					  update = purchaseDetailRepository.updateReplaceQtyInPurchaseDetail(batchList.get(i));
+				  }
+			}
+			  
 				 
 			if(update!=0)
 			{
