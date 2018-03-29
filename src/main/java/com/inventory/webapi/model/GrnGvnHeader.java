@@ -33,6 +33,9 @@ public class GrnGvnHeader {
 
 	@Column(name = "del_status")
 	private int delStatus;
+	
+	@Column(name = "grn_type")
+	private int grnType;
 	 
 	@Transient
 	private List<GrnGvnDetail> grnGvnDetailList;
@@ -85,10 +88,18 @@ public class GrnGvnHeader {
 		this.grnGvnDetailList = grnGvnDetailList;
 	}
 
+	public int getGrnType() {
+		return grnType;
+	}
+
+	public void setGrnType(int grnType) {
+		this.grnType = grnType;
+	}
+
 	@Override
 	public String toString() {
 		return "GrnGvnHeader [grnId=" + grnId + ", date=" + date + ", suppId=" + suppId + ", gstnNo=" + gstnNo
-				+ ", delStatus=" + delStatus + ", grnGvnDetailList=" + grnGvnDetailList + "]";
+				+ ", delStatus=" + delStatus + ", grnType=" + grnType + ", grnGvnDetailList=" + grnGvnDetailList + "]";
 	}
 	
 	

@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController; 
 import com.inventory.webapi.model.PurchaseHeader;
+import com.inventory.webapi.model.ReplaceItem;
 import com.inventory.webapi.model.TSetting;
 import com.inventory.webapi.model.UnpaidPurchaseBill;
+import com.inventory.webapi.model.GrnList;
 import com.inventory.webapi.model.Info;
 import com.inventory.webapi.model.PurchaseDetail;
 import com.inventory.webapi.repository.PurchaseDetailRepository;
@@ -241,6 +243,65 @@ public class PurchaseApiController {
 			info.setMessage("not update");
 		}
          return info;
+	}
+	
+	
+	@RequestMapping(value = { "/getItemByBatchNo" }, method = RequestMethod.POST)
+	public @ResponseBody PurchaseDetail getItemByBatchNo(@RequestParam ("batchNo") String batchNo)
+	{
+		System.out.println("batchNo :"+batchNo); 
+		PurchaseDetail purchaseDetail = new PurchaseDetail();
+		try {
+			  
+			purchaseDetail = purchaseDetailRepository.findByBatchNoAndDelStatus(batchNo,0);
+			if(purchaseDetail==null)
+			{
+				purchaseDetail = new PurchaseDetail();
+			}
+			System.out.println(purchaseDetail.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return purchaseDetail;
+
+	}
+	
+	@RequestMapping(value = { "/updateReplaceQtyInPurchaseBill" }, method = RequestMethod.POST)
+	public @ResponseBody Info updateReplaceQtyInPurchaseBill(@RequestBody List<ReplaceItem> replaceItemList)
+	{
+		Info info = new Info();
+		 
+		try {
+			int update=0;
+			for(int i=0;i<replaceItemList.size();i++)
+			{
+				update = purchaseDetailRepository.updateReplaceQtyInPurchaseBill(replaceItemList.get(i).getBatchNo(),replaceItemList.get(i).getTotalReplaceQty());
+				 
+			}
+				if(update==0)
+				{
+					info.setError(true);
+					info.setMessage("unsuccess");
+				}
+				else
+				{
+					info.setError(false);
+					info.setMessage("success");
+				}
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			info.setError(true);
+			info.setMessage("unsuccess");
+		}
+        
+		
+		return info;
+
 	}
 
 }

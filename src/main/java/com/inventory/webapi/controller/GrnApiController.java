@@ -31,14 +31,18 @@ public class GrnApiController {
 	GrnGvnDetailRepository grnGvnDetailRepository;
 	
 	@RequestMapping(value = { "/getItemFromPurchaseBillForGvn" }, method = RequestMethod.POST)
-	public @ResponseBody GrnList getItemFromPurchaseBillForGvn(@RequestParam ("batchNo") String batchNo,@RequestParam ("suppId")int suppId,
+	public @ResponseBody GrnList getItemFromPurchaseBillForGvn(@RequestParam ("grnType")int grnType,@RequestParam ("batchNo") String batchNo,@RequestParam ("suppId")int suppId,
 			@RequestParam ("currentDate")String currentDate)
 	{
 		System.out.println("batchNo :"+batchNo); 
 		GrnList getItemFromPurchaseBillForGvn = new GrnList();
 		try {
+			  if(grnType==0) 
+				  getItemFromPurchaseBillForGvn = grnListRepository.getItemRecord(batchNo,suppId,currentDate);
+			  else
+				  getItemFromPurchaseBillForGvn = grnListRepository.getItemRecordReplace(batchNo,suppId);
 			  
-			getItemFromPurchaseBillForGvn = grnListRepository.getItemRecord(batchNo,suppId,currentDate);
+			
 			if(getItemFromPurchaseBillForGvn==null)
 			{
 				getItemFromPurchaseBillForGvn = new GrnList();
@@ -55,13 +59,15 @@ public class GrnApiController {
 	}
 	
 	@RequestMapping(value = { "/getallExpireItemSupllierWise" }, method = RequestMethod.POST)
-	public @ResponseBody List<GrnList> getallExpireItemSupllierWise(@RequestParam ("suppId")int suppId, @RequestParam ("currentDate")String currentDate)
+	public @ResponseBody List<GrnList> getallExpireItemSupllierWise(@RequestParam ("grnType")int grnType,@RequestParam ("suppId")int suppId, @RequestParam ("currentDate")String currentDate)
 	{ 
 		
 		List<GrnList> getallExpireItemSupllierWise = new ArrayList<GrnList>();
 		try {
-			  
-			getallExpireItemSupllierWise = grnListRepository.getallExpireItemSupllierWise(suppId,currentDate);
+			  if(grnType==0) 
+				  getallExpireItemSupllierWise = grnListRepository.getallExpireItemSupllierWiseRegular(suppId,currentDate);
+			  else
+				  getallExpireItemSupllierWise = grnListRepository.getallExpireItemSupllierWiseReplace(suppId);
 			 
 			System.out.println(getallExpireItemSupllierWise.toString());
 		} catch (Exception e) {
