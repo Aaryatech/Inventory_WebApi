@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inventory.webapi.common.Common;
+import com.inventory.webapi.model.GrnReport;
+import com.inventory.webapi.model.ItemReplaceReport;
 import com.inventory.webapi.model.ItemWisePurchase;
 import com.inventory.webapi.model.PurchaseReport;
+import com.inventory.webapi.repository.GrnReportRepository;
+import com.inventory.webapi.repository.ItemReplaceReportRepository;
 import com.inventory.webapi.repository.ItemWisePurchaseRepository;
 import com.inventory.webapi.repository.PurchaseReportRepository; 
 
@@ -25,6 +29,12 @@ public class PurchaseReportApiController {
 	
 	@Autowired
 	ItemWisePurchaseRepository itemWisePurchaseRepository;
+	
+	@Autowired
+	GrnReportRepository grnReportRepository;
+	
+	@Autowired
+	ItemReplaceReportRepository itemReplaceReportRepository;
 	
 	@RequestMapping(value = { "/billwisePurchaseReport" }, method = RequestMethod.POST)
 	public @ResponseBody List<PurchaseReport> billwisePurchaseReport( @RequestParam("fromDate") String fromDate,@RequestParam("toDate") String toDate,
@@ -120,5 +130,49 @@ public class PurchaseReportApiController {
 		}
 		return itemwisePurchaseReport;
 	  }
+	
+	
+	@RequestMapping(value = { "/grnItemWiseReport" }, method = RequestMethod.POST)
+	public @ResponseBody List<GrnReport> grnItemWiseReport(@RequestParam ("fromDate")String fromDate, @RequestParam ("toDate")String toDate,
+			@RequestParam ("grnType")int grnType)
+	{ 
+		
+		List<GrnReport> grnItemWiseReport = new ArrayList<GrnReport>();
+		try {
+			  System.out.println("fromDate " + fromDate);
+			  System.out.println("toDate " + toDate);
+			   grnItemWiseReport = grnReportRepository.grnItemWiseReport(fromDate,toDate,grnType);
+			 
+			System.out.println(grnItemWiseReport.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return grnItemWiseReport;
+
+	}
+	
+	
+	@RequestMapping(value = { "/itemReplaceReport" }, method = RequestMethod.GET)
+	public @ResponseBody List<ItemReplaceReport> itemReplaceReport()
+	{ 
+		
+		List<ItemReplaceReport> itemReplaceReport = new ArrayList<ItemReplaceReport>();
+		try {
+			  
+			  itemReplaceReport = itemReplaceReportRepository.itemReplaceReport();
+				  
+			System.out.println(itemReplaceReport.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return itemReplaceReport;
+
+	}
 
 }

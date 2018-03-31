@@ -10,9 +10,12 @@ import com.inventory.webapi.model.GrnGvnHeader;
 
 public interface GrnGvnHeaderRepository extends JpaRepository<GrnGvnHeader, Integer>{
 
+	@Query(value="select * from grn_gvn where (date between :fromDate and :toDate) and del_status=0 and grn_type=:grnType",nativeQuery=true)
+	List<GrnGvnHeader> findByGrnListByDate(@Param("fromDate")String fromDate,@Param("toDate") String toDate,@Param("grnType") int grnType);
+
 	@Query(value="select * from grn_gvn where (date between :fromDate and :toDate) and del_status=0",nativeQuery=true)
 	List<GrnGvnHeader> findByGrnListByDate(@Param("fromDate")String fromDate,@Param("toDate") String toDate);
-
+	
 	GrnGvnHeader findByGrnId(int grnId);
 
 }
