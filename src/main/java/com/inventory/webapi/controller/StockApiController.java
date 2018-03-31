@@ -155,7 +155,7 @@ public class StockApiController {
 		 String keyword=itemName+"%";
 		List<ItemStock> item = new ArrayList<>();
 		try {
-			 
+			  
 			item = itemStockRepository.getLastRateByItemName(keyword);
 			if(item==null)
 			{

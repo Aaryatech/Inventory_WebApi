@@ -39,9 +39,9 @@ public interface ItemStockRepository extends JpaRepository<ItemStock, Integer>{
 			"                    where\r\n" + 
 			"                    t.pur_detail_id = tm.pur_detail_id\r\n" + 
 			"                    and t.del_status=0 \r\n" + 
-			"                and t.item_name = :itemName \r\n" + 
+			"                and t.item_name LIKE :itemName \r\n" + 
 			"            group by\r\n" + 
 			"                t.item_id;",nativeQuery=true)
-	ItemStock getLastRateByItemName(@Param("itemName")String itemName);
+	List<ItemStock> getLastRateByItemName(@Param("itemName")String itemName);
 
 }
