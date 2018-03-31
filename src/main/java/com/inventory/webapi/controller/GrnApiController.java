@@ -28,7 +28,7 @@ public class GrnApiController {
 	GrnGvnHeaderRepository grnGvnHeaderRepository;
 	
 	@Autowired
-	GrnGvnDetailRepository grnGvnDetailRepository;
+	GrnGvnDetailRepository grnGvnDetailRepository; 
 	
 	@RequestMapping(value = { "/getItemFromPurchaseBillForGvn" }, method = RequestMethod.POST)
 	public @ResponseBody GrnList getItemFromPurchaseBillForGvn(@RequestParam ("grnType")int grnType,@RequestParam ("batchNo") String batchNo,@RequestParam ("suppId")int suppId,
@@ -108,14 +108,19 @@ public class GrnApiController {
 	}
 	
 	@RequestMapping(value = { "/getHistoryOfGrnGvn" }, method = RequestMethod.POST)
-	public @ResponseBody List<GrnGvnHeader> getHistoryOfGrnGvn(@RequestParam ("fromDate")String fromDate, @RequestParam ("toDate")String toDate)
+	public @ResponseBody List<GrnGvnHeader> getHistoryOfGrnGvn(@RequestParam ("fromDate")String fromDate, @RequestParam ("toDate")String toDate,
+			@RequestParam ("grnType")int grnType)
 	{ 
 		
 		List<GrnGvnHeader> grnGvnHeaderList = new ArrayList<GrnGvnHeader>();
 		try {
 			  System.out.println("fromDate " + fromDate);
 			  System.out.println("toDate " + toDate);
-			grnGvnHeaderList = grnGvnHeaderRepository.findByGrnListByDate(fromDate,toDate);
+			  if(grnType==-1)
+				  grnGvnHeaderList = grnGvnHeaderRepository.findByGrnListByDate(fromDate,toDate);
+			  else
+				  grnGvnHeaderList = grnGvnHeaderRepository.findByGrnListByDate(fromDate,toDate,grnType);
+			
 			 
 			System.out.println(grnGvnHeaderList.toString());
 		} catch (Exception e) {
@@ -150,6 +155,8 @@ public class GrnApiController {
 		return grnGvnHeader;
 
 	}
+	
+	
 	
 	 
 

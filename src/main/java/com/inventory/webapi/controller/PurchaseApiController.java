@@ -1,6 +1,6 @@
 package com.inventory.webapi.controller;
-
-import java.util.ArrayList;import java.util.Date;
+ 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inventory.webapi.model.PurchaseHeader;
 import com.inventory.webapi.model.ReplaceItem;
 import com.inventory.webapi.model.TSetting;
-import com.inventory.webapi.model.UnpaidPurchaseBill;
-import com.inventory.webapi.model.GrnList;
+import com.inventory.webapi.model.UnpaidPurchaseBill; 
 import com.inventory.webapi.model.Info;
 import com.inventory.webapi.model.PurchaseDetail;
 import com.inventory.webapi.repository.PurchaseDetailRepository;
