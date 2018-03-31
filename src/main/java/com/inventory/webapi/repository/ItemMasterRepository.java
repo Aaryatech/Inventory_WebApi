@@ -19,6 +19,7 @@ public interface ItemMasterRepository extends JpaRepository<ItemMaster, Integer>
 	@Transactional
 	@Modifying
 	@Query(" UPDATE ItemMaster SET del_status=1 WHERE item_id=:itemId")
-	int deleteItem(@Param("itemId")int itemId); 
+	int deleteItem(@Param("itemId")int itemId);
 
+	
 }

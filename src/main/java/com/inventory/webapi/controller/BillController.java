@@ -18,11 +18,13 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.inventory.webapi.common.Common;
 import com.inventory.webapi.model.BillDetail;
 import com.inventory.webapi.model.BillHeader;
+import com.inventory.webapi.model.CustomerMaster;
 import com.inventory.webapi.model.Info;
 import com.inventory.webapi.model.PurchaseDetail;
 import com.inventory.webapi.model.PurchaseHeader;
 import com.inventory.webapi.repository.BillDetailRepository;
 import com.inventory.webapi.repository.BillHeaderRepository;
+import com.inventory.webapi.repository.CustomerMasterRepository;
 import com.inventory.webapi.repository.PurchaseDetailRepository;
 import com.inventory.webapi.repository.PurchaseHeaderRepository;
 import com.inventory.webapi.service.BillService;
@@ -42,8 +44,13 @@ public class BillController {
 	
 	@Autowired
 	BillHeaderRepository billHeaderRepository;
+	
 	@Autowired
 	BillDetailRepository billDetailRepository;
+	
+	@Autowired
+	CustomerMasterRepository customerMasterRepository;
+	
 	//------------------------------------- BILL---------------------------------
 		@RequestMapping(value = { "/insertBill" }, method = RequestMethod.POST)
 		public @ResponseBody BillHeader placeItemOrder(@RequestBody BillHeader billJson)
@@ -160,5 +167,21 @@ public class BillController {
 	         return info;
 		}
 
-		
+		@RequestMapping(value = { "/getValidCustomers" }, method = RequestMethod.GET)
+		public @ResponseBody List<CustomerMaster> getValidCustomers()
+		{
+			 
+			List<CustomerMaster> getCustomerList = new ArrayList<CustomerMaster>();
+			try {
+					  getCustomerList = customerMasterRepository.findUnBloked();
+				
+			} catch (Exception e) {
+
+				e.printStackTrace();
+			}
+	        
+			
+			return getCustomerList;
+
+		}
 }

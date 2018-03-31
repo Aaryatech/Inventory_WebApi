@@ -81,6 +81,8 @@ public class ItemMaster {
 	
 	@Column(name = "del_status")
 	private int delStatus;
+	
+	
 
 	public int getItemId() {
 		return itemId;

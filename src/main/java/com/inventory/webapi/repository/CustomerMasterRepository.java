@@ -19,6 +19,10 @@ public interface CustomerMasterRepository extends JpaRepository<CustomerMaster, 
 	@Transactional
 	@Modifying
 	@Query(" UPDATE CustomerMaster SET del_status=1 WHERE cust_id=:custId") 
-	int deleteCustomer(@Param("custId")int custId);  
+	int deleteCustomer(@Param("custId")int custId);
+
+	@Query(value="select cust_id,cust_name,gstin,address,cust_code,mobile,email,phone1,cust_type,conct_prsn,prsn_email,pan_no,is_same_state,credit_days,del_status from s_customer where del_status=0 and cust_id NOT IN(select cust_id from t_bill_header where (select CURDATE()\r\n" + 
+			"> DATE_ADD(t_bill_header.invoice_date, INTERVAL 30 DAY)) and t_bill_header.bill_status=2 group by t_bill_header.cust_id)",nativeQuery=true)
+	List<CustomerMaster> findUnBloked();  
 
 }

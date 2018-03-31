@@ -22,7 +22,7 @@ public interface PurchaseDetailRepository extends JpaRepository<PurchaseDetail, 
 
 	List<PurchaseDetail> save(List<PurchaseDetail> purchaseDetailList);
 
-	@Query(value="select pur_detail_id, purchase_id, item_id, item_name, item_uom, rec_qty, rate,base_rate, value, disc_per, disc_amt, freight_amt, insu_amt, cgst_per, cgst_rs, sgst_per, sgst_rs, igst_per, igst_rs, cess_per, cess_rs, taxable_amt, total, round_off, del_status, disc_on_bill, other_extra, batch_no, sell_qty, balance, rate_without_tax, rate_with_tax, wholesale_rate, retail_rate,expiry_date from t_purchase_detail where balance>0 and is_grn=0",nativeQuery=true)
+	@Query(value="select pur_detail_id, purchase_id, item_id, item_name, item_uom, rec_qty, rate,base_rate, value, disc_per, disc_amt, freight_amt, insu_amt, cgst_per, cgst_rs, sgst_per, sgst_rs, igst_per, igst_rs, cess_per, cess_rs, taxable_amt, total, round_off, del_status, disc_on_bill, other_extra, batch_no, sell_qty, balance, rate_without_tax, rate_with_tax, wholesale_rate, retail_rate,expiry_date,replace_qty from t_purchase_detail where balance>0 and is_grn=0",nativeQuery=true)
 	List<PurchaseDetail> findBatchesOfItem();
 
 	PurchaseDetail findByBatchNoAndDelStatus(String batchNo, int delStatus);
