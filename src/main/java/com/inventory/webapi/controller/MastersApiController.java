@@ -17,6 +17,7 @@ import com.inventory.webapi.model.ItemCategory;
 import com.inventory.webapi.model.ItemGroup;
 import com.inventory.webapi.model.ItemMaster;
 import com.inventory.webapi.model.ItemUom;
+import com.inventory.webapi.model.LoginResponse; 
 import com.inventory.webapi.model.SupplierMaster;
 import com.inventory.webapi.model.User;
 import com.inventory.webapi.repository.CustomerMasterRepository;
@@ -685,5 +686,36 @@ public class MastersApiController {
          
 		return info; 
 	}
+	
+	@RequestMapping(value = { "/loginResponse" }, method = RequestMethod.POST)
+	public @ResponseBody LoginResponse loginResponse(@RequestParam ("userName") String userName,@RequestParam ("pass") String pass)
+	{
+		 
+		LoginResponse loginResponse = new LoginResponse();
+		try {
+			  
+			User user = userRepository.findByUserNameAndPasswordAndDelStatus(userName,pass,0);
+			if(user==null)
+			{
+				loginResponse.setError(true);
+				loginResponse.setMsg("login Failed");
+			}
+			else
+			{
+				loginResponse.setError(false);
+				loginResponse.setMsg("login successfully");
+				loginResponse.setUser(user);
+			}
+			 
+		} catch (Exception e) {
 
+			e.printStackTrace();
+			loginResponse.setError(true);
+			loginResponse.setMsg("login Failed");
+		}
+         
+		return loginResponse; 
+	}
+	
+	 
 }

@@ -149,6 +149,30 @@ public class StockApiController {
 
 	}
 	
+	@RequestMapping(value = { "/getLastRateByItemName" }, method = RequestMethod.POST)
+	public @ResponseBody ItemStock getLastRateByItemName(@RequestParam ("itemName") String itemName)
+	{
+		 
+		ItemStock item = new ItemStock();
+		try {
+			 
+			item = itemStockRepository.getLastRateByItemName(itemName);
+			if(item==null)
+			{
+				item = new ItemStock();
+			}
+			
+			  
+		} catch (Exception e) {
+
+			e.printStackTrace();
+			item = new ItemStock();
+		}
+         
+		return item;
+
+	}
+	
 	
 	@RequestMapping(value = { "/getCurrentStock" }, method = RequestMethod.POST)
 	public @ResponseBody List<GetCurrentStock> getCurrentStock(@RequestParam ("date") String date)
