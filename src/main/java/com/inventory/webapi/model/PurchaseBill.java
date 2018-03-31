@@ -37,13 +37,13 @@ public class PurchaseBill implements Serializable{
 	private int suppId;
 	
 	@Column(name = "supp_name")
-	private String suppName;
+	private String supplierName;
 	
 	@Column(name = "invoice_no")
 	private String invoiceNo;
 
 	@Column(name = "inv_date")
-	private Date invDate;
+	private Date invoiceDate;
 	
 	
 	@Column(name = "item_name")
@@ -279,13 +279,6 @@ public class PurchaseBill implements Serializable{
 		this.suppId = suppId;
 	}
 
-	public String getSuppName() {
-		return suppName;
-	}
-
-	public void setSuppName(String suppName) {
-		this.suppName = suppName;
-	}
 
 	public String getInvoiceNo() {
 		return invoiceNo;
@@ -295,13 +288,7 @@ public class PurchaseBill implements Serializable{
 		this.invoiceNo = invoiceNo;
 	}
 
-	public Date getInvDate() {
-		return invDate;
-	}
-
-	public void setInvDate(Date invDate) {
-		this.invDate = invDate;
-	}
+	
 
 	public String getItemName() {
 		return itemName;
@@ -726,30 +713,42 @@ public class PurchaseBill implements Serializable{
 	public void setIsBillPaid(String isBillPaid) {
 		this.isBillPaid = isBillPaid;
 	}
-
+	public String getSupplierName() {
+		return supplierName;
+	}
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+	public Date getInvoiceDate() {
+		return invoiceDate;
+	}
+	public void setInvoiceDate(Date invoiceDate) {
+		this.invoiceDate = invoiceDate;
+	}
 	@Override
 	public String toString() {
 		return "PurchaseBill [purDetailId=" + purDetailId + ", purchaseId=" + purchaseId + ", purchaseNo=" + purchaseNo
 				+ ", date=" + date + ", time=" + time + ", vehicleNo=" + vehicleNo + ", suppId=" + suppId
-				+ ", suppName=" + suppName + ", invoiceNo=" + invoiceNo + ", invDate=" + invDate + ", itemName="
-				+ itemName + ", itemId=" + itemId + ", itemUom=" + itemUom + ", recQty=" + recQty + ", rate=" + rate
-				+ ", baseRate=" + baseRate + ", value=" + value + ", discPer=" + discPer + ", discAmt=" + discAmt
-				+ ", freightAmt=" + freightAmt + ", insuAmt=" + insuAmt + ", cgstPer=" + cgstPer + ", cgstRs=" + cgstRs
-				+ ", sgstPer=" + sgstPer + ", sgstRs=" + sgstRs + ", igstPer=" + igstPer + ", igstRs=" + igstRs
-				+ ", cessPer=" + cessPer + ", cessRs=" + cessRs + ", taxableAmt=" + taxableAmt + ", total=" + total
-				+ ", roundOff=" + roundOff + ", discOnBill=" + discOnBill + ", otherExtra=" + otherExtra + ", batchNo="
-				+ batchNo + ", sellQty=" + sellQty + ", balance=" + balance + ", rateWithoutTax=" + rateWithoutTax
-				+ ", rateWithTax=" + rateWithTax + ", wholesaleRate=" + wholesaleRate + ", retailRate=" + retailRate
-				+ ", isGrn=" + isGrn + ", expiryDate=" + expiryDate + ", replaceQty=" + replaceQty + ", totalValue="
-				+ totalValue + ", totalDiscPer=" + totalDiscPer + ", totalDiscAmt=" + totalDiscAmt + ", totalDiscAmt2="
-				+ totalDiscAmt2 + ", totalFreightAmt=" + totalFreightAmt + ", totalInsuranceAmt=" + totalInsuranceAmt
-				+ ", totalCgst=" + totalCgst + ", totalSgst=" + totalSgst + ", totalIgst=" + totalIgst + ", totalCess="
-				+ totalCess + ", totalTaxableAmt=" + totalTaxableAmt + ", totalBillAmt=" + totalBillAmt
-				+ ", totalRoundOff=" + totalRoundOff + ", totalOtherExtra=" + totalOtherExtra + ", payDeadline1="
-				+ payDeadline1 + ", payDeadline2=" + payDeadline2 + ", payDeadline3=" + payDeadline3 + ", payDeadline4="
-				+ payDeadline4 + ", isBillPaid=" + isBillPaid + "]";
+				+ ", supplierName=" + supplierName + ", invoiceNo=" + invoiceNo + ", invoiceDate=" + invoiceDate
+				+ ", itemName=" + itemName + ", itemId=" + itemId + ", itemUom=" + itemUom + ", recQty=" + recQty
+				+ ", rate=" + rate + ", baseRate=" + baseRate + ", value=" + value + ", discPer=" + discPer
+				+ ", discAmt=" + discAmt + ", freightAmt=" + freightAmt + ", insuAmt=" + insuAmt + ", cgstPer="
+				+ cgstPer + ", cgstRs=" + cgstRs + ", sgstPer=" + sgstPer + ", sgstRs=" + sgstRs + ", igstPer="
+				+ igstPer + ", igstRs=" + igstRs + ", cessPer=" + cessPer + ", cessRs=" + cessRs + ", taxableAmt="
+				+ taxableAmt + ", total=" + total + ", roundOff=" + roundOff + ", discOnBill=" + discOnBill
+				+ ", otherExtra=" + otherExtra + ", batchNo=" + batchNo + ", sellQty=" + sellQty + ", balance="
+				+ balance + ", rateWithoutTax=" + rateWithoutTax + ", rateWithTax=" + rateWithTax + ", wholesaleRate="
+				+ wholesaleRate + ", retailRate=" + retailRate + ", isGrn=" + isGrn + ", expiryDate=" + expiryDate
+				+ ", replaceQty=" + replaceQty + ", totalValue=" + totalValue + ", totalDiscPer=" + totalDiscPer
+				+ ", totalDiscAmt=" + totalDiscAmt + ", totalDiscAmt2=" + totalDiscAmt2 + ", totalFreightAmt="
+				+ totalFreightAmt + ", totalInsuranceAmt=" + totalInsuranceAmt + ", totalCgst=" + totalCgst
+				+ ", totalSgst=" + totalSgst + ", totalIgst=" + totalIgst + ", totalCess=" + totalCess
+				+ ", totalTaxableAmt=" + totalTaxableAmt + ", totalBillAmt=" + totalBillAmt + ", totalRoundOff="
+				+ totalRoundOff + ", totalOtherExtra=" + totalOtherExtra + ", payDeadline1=" + payDeadline1
+				+ ", payDeadline2=" + payDeadline2 + ", payDeadline3=" + payDeadline3 + ", payDeadline4=" + payDeadline4
+				+ ", isBillPaid=" + isBillPaid + "]";
 	}
-	
-	
+    
+
 	
 }

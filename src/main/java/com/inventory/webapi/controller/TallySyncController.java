@@ -195,7 +195,7 @@ public class TallySyncController {
 	
 	
 	@RequestMapping(value = { "/updateSalesVoucher" }, method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<byte[]> updateSalesVoucher(@RequestParam("bill_no") int billNo,
+	public @ResponseBody ResponseEntity<byte[]> updateSalesVoucher(@RequestParam("billNo") int billNo,
 			@RequestParam("isTallySync") int isTallySync) {
 
 		Info info = tallyService.updateSalesVoucher(billNo, isTallySync);

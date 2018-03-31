@@ -41,7 +41,7 @@ public interface TallyBillRepository extends JpaRepository<TallyBill, Integer> {
 			"  t_bill_detail.disc_amt, \n" + 
 			"  t_bill_header.taxable_amt as total_taxable_amt,\n" + 
 			"  t_bill_header.tax_amt as total_tax_amt,\n" + 
-			"  t_bill_header.grand_total as total_grand_Amt,\n" + 
+			"  t_bill_header.grand_total as total_grand_amt,\n" + 
 			"  t_bill_header.discount_amt as total_discount_amt,\n" + 
 			"  t_bill_header.paid_amt as total_paid_amt,\n" + 
 			"  t_bill_header.rem_amt as total_remaining_amt,\n" + 

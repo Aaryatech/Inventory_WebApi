@@ -13,7 +13,7 @@ public interface TallyUpdateSupplierRepository extends JpaRepository<TallyUpdate
 
 	@Transactional
 	@Modifying
-	@Query("UPDATE TallyUpdateSupplier i SET i.in1 =:isTallySync  WHERE i.suppId=:id")
+	@Query("UPDATE TallyUpdateSupplier i SET i.isTallySync =:isTallySync  WHERE i.suppId=:id")
 	int updateSupplier(@Param("id")int id,@Param("isTallySync") int isTallySync);
 
 }

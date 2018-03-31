@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostLoad;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 public class TallyItem implements Serializable{
@@ -27,10 +29,16 @@ public class TallyItem implements Serializable{
 	private String hsnCode; 
 	
 	@Column(name = "group_name")
-	private String groupName;
+	private String itemGroup;
+	
+    @Transient
+	private String subGroup;
+	
+    @Transient
+	private String subSubGroup;
 	
 	@Column(name = "cat_name")
-	private String catName;
+	private String categoryName;
 	
 	@Column(name = "uom_name")
 	private String uom;
@@ -72,7 +80,7 @@ public class TallyItem implements Serializable{
 	private int storeRolQty;
 	
 	@Column(name = "is_critical")
-	private int isCritical;
+	private String isCritical;
 	
 	@Column(name = "image")
 	private String image; 
@@ -80,9 +88,27 @@ public class TallyItem implements Serializable{
 	@Column(name = "del_status")
 	private int delStatus;
 	
-	@Column(name = "int1")
+	@Column(name = "is_tally_sync")
 	private int isTallySync;
 
+	@PostLoad
+	public void onLoad() {
+		this.subGroup="";
+		this.subSubGroup="";
+		if(this.isCritical=="0")
+		{
+			this.isCritical="LOW";
+		}
+		else if(this.isCritical=="1")
+		{
+			this.isCritical="Medium";
+		}
+		else
+		{
+			this.isCritical="HIGH";
+		}
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -115,23 +141,47 @@ public class TallyItem implements Serializable{
 		this.hsnCode = hsnCode;
 	}
 
-	public String getGroupName() {
-		return groupName;
+	public String getItemGroup() {
+		return itemGroup;
 	}
 
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
+	public void setItemGroup(String itemGroup) {
+		this.itemGroup = itemGroup;
 	}
 
 	public String getCatName() {
-		return catName;
+		return categoryName;
 	}
 
-	public void setCatName(String catName) {
-		this.catName = catName;
+	public void setCatName(String categoryName) {
+		this.categoryName = categoryName;
 	}
-
+   
 	
+	public String getSubGroup() {
+		return subGroup;
+	}
+
+	public void setSubGroup(String subGroup) {
+		this.subGroup = subGroup;
+	}
+
+	public String getSubSubGroup() {
+		return subSubGroup;
+	}
+
+	public void setSubSubGroup(String subSubGroup) {
+		this.subSubGroup = subSubGroup;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
 	public String getUom() {
 		return uom;
 	}
@@ -236,11 +286,11 @@ public class TallyItem implements Serializable{
 		this.storeRolQty = storeRolQty;
 	}
 
-	public int getIsCritical() {
+	public String getIsCritical() {
 		return isCritical;
 	}
 
-	public void setIsCritical(int isCritical) {
+	public void setIsCritical(String isCritical) {
 		this.isCritical = isCritical;
 	}
 
@@ -271,13 +321,14 @@ public class TallyItem implements Serializable{
 	@Override
 	public String toString() {
 		return "TallyItem [id=" + id + ", itemCode=" + itemCode + ", itemName=" + itemName + ", hsnCode=" + hsnCode
-				+ ", groupName=" + groupName + ", catName=" + catName + ", uom=" + uom + ", weight=" + weight
-				+ ", packQty=" + packQty + ", bmsMinQty=" + bmsMinQty + ", bmsMaxQty=" + bmsMaxQty + ", bmsRolQty="
-				+ bmsRolQty + ", cgstPer=" + cgstPer + ", sgstPer=" + sgstPer + ", igstPer=" + igstPer + ", cessPer="
-				+ cessPer + ", storeMinQty=" + storeMinQty + ", storeMaxQty=" + storeMaxQty + ", storeRolQty="
-				+ storeRolQty + ", isCritical=" + isCritical + ", image=" + image + ", delStatus=" + delStatus
-				+ ", isTallySync=" + isTallySync + "]";
+				+ ", itemGroup=" + itemGroup + ", subGroup=" + subGroup + ", subSubGroup=" + subSubGroup
+				+ ", categoryName=" + categoryName + ", uom=" + uom + ", weight=" + weight + ", packQty=" + packQty
+				+ ", bmsMinQty=" + bmsMinQty + ", bmsMaxQty=" + bmsMaxQty + ", bmsRolQty=" + bmsRolQty + ", cgstPer="
+				+ cgstPer + ", sgstPer=" + sgstPer + ", igstPer=" + igstPer + ", cessPer=" + cessPer + ", storeMinQty="
+				+ storeMinQty + ", storeMaxQty=" + storeMaxQty + ", storeRolQty=" + storeRolQty + ", isCritical="
+				+ isCritical + ", image=" + image + ", delStatus=" + delStatus + ", isTallySync=" + isTallySync + "]";
 	}
 
+    
 	
 }

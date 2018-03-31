@@ -227,7 +227,7 @@ public class TallySyncServiceImpl implements TallySyncService{
 					info.setError(false);
 					info.setMessage("SalesVoucher Found Successfully");
 					
-					allSales.setTallyBillList(saleBillList);
+					allSales.setSalesBillList(saleBillList);
 					allSales.setInfo(info);	
 				}
 				

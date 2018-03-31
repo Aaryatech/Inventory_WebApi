@@ -37,8 +37,8 @@ public interface TallyItemRepository extends JpaRepository<TallyItem, Integer>{
 			"  m_item.is_critical,\n" + 
 			"  m_item.image,\n" + 
 			"  m_item.del_status,\n" + 
-			"  m_item.int1\n" + 
-			"  from m_item,s_group,s_item_category where m_item.del_status=0 and m_item.int1=0 and m_item.group_id=s_group.group_id and m_item.cat_id=s_item_category.cat_id",nativeQuery=true)
+			"  m_item.is_tally_sync\n" + 
+			"  from m_item,s_group,s_item_category where m_item.del_status=0 and m_item.is_tally_sync=0 and m_item.group_id=s_group.group_id and m_item.cat_id=s_item_category.cat_id",nativeQuery=true)
 	List<TallyItem> findByIsTallySync();
 
 

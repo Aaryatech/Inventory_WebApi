@@ -16,8 +16,8 @@ public class TallyUpdateSupplier {
 	@Column(name = "supp_id")
 	private int suppId; 
 	
-	@Column(name = "in1")
-	private int in1;
+	@Column(name = "is_tally_sync")
+	private int isTallySync;
 
 	public int getSuppId() {
 		return suppId;
@@ -27,18 +27,19 @@ public class TallyUpdateSupplier {
 		this.suppId = suppId;
 	}
 
-	public int getIn1() {
-		return in1;
+	public int getIsTallySync() {
+		return isTallySync;
 	}
 
-	public void setIn1(int in1) {
-		this.in1 = in1;
+	public void setIsTallySync(int isTallySync) {
+		this.isTallySync = isTallySync;
 	}
 
 	@Override
 	public String toString() {
-		return "TallyUpdateSupplier [suppId=" + suppId + ", in1=" + in1 + "]";
+		return "TallyUpdateSupplier [suppId=" + suppId + ", isTallySync=" + isTallySync + "]";
 	}
+
 	
 	
 }

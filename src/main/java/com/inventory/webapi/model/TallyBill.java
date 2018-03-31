@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PostLoad;
 
 
 @Entity
@@ -37,7 +38,7 @@ public class TallyBill implements Serializable{
 	private String gstin;
 	
 	@Column(name = "cust_type")
-	private int custType;
+	private String custType;
 	
 	@Column(name = "item_id")
 	private int itemId; 
@@ -117,8 +118,8 @@ public class TallyBill implements Serializable{
 	@Column(name = "total_tax_amt")
 	private float totaTaxAmt;
 	
-	@Column(name = "total_grand_Amt")
-	private float totalGrandTotal;
+	@Column(name = "total_grand_amt")
+	private float totalGrandAmt;
 	
 	@Column(name = "bill_discount_per")
 	private float billDiscountPer;
@@ -133,7 +134,7 @@ public class TallyBill implements Serializable{
 	private float totalRemainingAmt;
 	
 	@Column(name = "bill_status")
-	private int billStatus;
+	private String billStatus;
 	
 	@Column(name = "remark")
 	private String remark;
@@ -141,6 +142,29 @@ public class TallyBill implements Serializable{
 	@Column(name = "expiry_date")
 	private Date expiryDate;
 
+	@PostLoad
+	public void onLoad() {
+	
+		if(this.custType.equals("1"))
+		{
+			this.custType="Wholesaler";
+		}
+		else if(this.custType.equals("2"))
+		{
+			this.custType="Retailer";
+		}
+
+		if(this.billStatus.equals("1"))
+		{
+			this.billStatus="Paid";
+		}
+		else if(this.billStatus.equals("2"))
+		{
+			this.billStatus="Unpaid";
+		}
+	}
+	
+	
 	public int getBillDetailId() {
 		return billDetailId;
 	}
@@ -197,11 +221,11 @@ public class TallyBill implements Serializable{
 		this.gstin = gstin;
 	}
 
-	public int getCustType() {
+	public String getCustType() {
 		return custType;
 	}
 
-	public void setCustType(int custType) {
+	public void setCustType(String custType) {
 		this.custType = custType;
 	}
 
@@ -414,13 +438,16 @@ public class TallyBill implements Serializable{
 		this.totaTaxAmt = totaTaxAmt;
 	}
 
-	public float getTotalGrandTotal() {
-		return totalGrandTotal;
+	
+	public float getTotalGrandAmt() {
+		return totalGrandAmt;
 	}
 
-	public void setTotalGrandTotal(float totalGrandTotal) {
-		this.totalGrandTotal = totalGrandTotal;
+
+	public void setTotalGrandAmt(float totalGrandAmt) {
+		this.totalGrandAmt = totalGrandAmt;
 	}
+
 
 	public float getBillDiscountPer() {
 		return billDiscountPer;
@@ -454,11 +481,11 @@ public class TallyBill implements Serializable{
 		this.totalRemainingAmt = totalRemainingAmt;
 	}
 
-	public int getBillStatus() {
+	public String getBillStatus() {
 		return billStatus;
 	}
 
-	public void setBillStatus(int billStatus) {
+	public void setBillStatus(String billStatus) {
 		this.billStatus = billStatus;
 	}
 
@@ -488,7 +515,7 @@ public class TallyBill implements Serializable{
 				+ ", igstPer=" + igstPer + ", igstRs=" + igstRs + ", cessPer=" + cessPer + ", cessRs=" + cessRs
 				+ ", taxAmt=" + taxAmt + ", grandTotal=" + grandTotal + ", totalTaxableAmt=" + totalTaxableAmt
 				+ ", totalCgst=" + totalCgst + ", totalSgst=" + totalSgst + ", totalIgst=" + totalIgst + ", totalCess="
-				+ totalCess + ", totaTaxAmt=" + totaTaxAmt + ", totalGrandTotal=" + totalGrandTotal
+				+ totalCess + ", totaTaxAmt=" + totaTaxAmt + ", totalGrandTotal=" + totalGrandAmt
 				+ ", billDiscountPer=" + billDiscountPer + ", totalDiscountAmt=" + totalDiscountAmt + ", totalPaidAmt="
 				+ totalPaidAmt + ", totalRemainingAmt=" + totalRemainingAmt + ", billStatus=" + billStatus + ", remark="
 				+ remark + ", expiryDate=" + expiryDate + "]";

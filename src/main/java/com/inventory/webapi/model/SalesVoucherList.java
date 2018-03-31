@@ -8,11 +8,12 @@ public class SalesVoucherList {
 	
 	Info info;
 
-	public List<TallyBill> getTallyBillList() {
+    
+	public List<TallyBill> getSalesBillList() {
 		return salesBillList;
 	}
 
-	public void setTallyBillList(List<TallyBill> salesBillList) {
+	public void setSalesBillList(List<TallyBill> salesBillList) {
 		this.salesBillList = salesBillList;
 	}
 

@@ -17,16 +17,16 @@ public class TallyCustomer implements Serializable{
 	private int custId; 
 	
 	@Column(name = "cust_name")
-	private String custName;
+	private String customerName;
 
 	@Column(name = "address")
 	private String address;
 	
 	@Column(name = "gstin")
-	private String gstin;
+	private String gstIn;
 	
 	@Column(name = "cust_code")
-	private String custCode;
+	private String customerCode;
 	
 	@Column(name = "mobile")
 	private String mobile; 
@@ -84,12 +84,30 @@ public class TallyCustomer implements Serializable{
 		this.custId = custId;
 	}
 
-	public String getCustName() {
-		return custName;
+	
+
+	public String getCustomerName() {
+		return customerName;
 	}
 
-	public void setCustName(String custName) {
-		this.custName = custName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public String getGstIn() {
+		return gstIn;
+	}
+
+	public void setGstIn(String gstIn) {
+		this.gstIn = gstIn;
+	}
+
+	public String getCustomerCode() {
+		return customerCode;
+	}
+
+	public void setCustomerCode(String customerCode) {
+		this.customerCode = customerCode;
 	}
 
 	public String getAddress() {
@@ -100,21 +118,7 @@ public class TallyCustomer implements Serializable{
 		this.address = address;
 	}
 
-	public String getGstin() {
-		return gstin;
-	}
-
-	public void setGstin(String gstin) {
-		this.gstin = gstin;
-	}
-
-	public String getCustCode() {
-		return custCode;
-	}
-
-	public void setCustCode(String custCode) {
-		this.custCode = custCode;
-	}
+	
 
 	public String getMobile() {
 		return mobile;
@@ -198,12 +202,12 @@ public class TallyCustomer implements Serializable{
 
 	@Override
 	public String toString() {
-		return "TallyCustomer [custId=" + custId + ", custName=" + custName + ", address=" + address + ", gstin="
-				+ gstin + ", custCode=" + custCode + ", mobile=" + mobile + ", email=" + email + ", phone1=" + phone1
-				+ ", custType=" + custType + ", conctPrsn=" + conctPrsn + ", prsnEmail=" + prsnEmail + ", panNo="
-				+ panNo + ", isSameState=" + isSameState + ", creditDays=" + creditDays + ", delStatus=" + delStatus
-				+ "]";
+		return "TallyCustomer [custId=" + custId + ", customerName=" + customerName + ", address=" + address
+				+ ", gstIn=" + gstIn + ", customerCode=" + customerCode + ", mobile=" + mobile + ", email=" + email
+				+ ", phone1=" + phone1 + ", custType=" + custType + ", conctPrsn=" + conctPrsn + ", prsnEmail="
+				+ prsnEmail + ", panNo=" + panNo + ", isSameState=" + isSameState + ", creditDays=" + creditDays
+				+ ", delStatus=" + delStatus + "]";
 	}
-	
+   
 	
 }

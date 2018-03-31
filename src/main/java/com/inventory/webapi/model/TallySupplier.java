@@ -27,7 +27,7 @@ public class TallySupplier implements Serializable{
 	private String address;
 	
 	@Column(name = "gstin_no")
-	private String gstinNo;
+	private String gstIn;
 	
 	@Column(name = "city")
 	private String city;
@@ -89,7 +89,7 @@ public class TallySupplier implements Serializable{
 	@Column(name = "is_same_state")
 	private String isSameState;
 	
-	@Column(name = "in1")
+	@Column(name = "is_tally_sync")
 	private int isTallySync;
 
 	@PostLoad
@@ -126,14 +126,13 @@ public class TallySupplier implements Serializable{
 		this.address = address;
 	}
 
-	public String getGstinNo() {
-		return gstinNo;
+    
+	public String getGstIn() {
+		return gstIn;
 	}
-
-	public void setGstinNo(String gstinNo) {
-		this.gstinNo = gstinNo;
+	public void setGstIn(String gstIn) {
+		this.gstIn = gstIn;
 	}
-
 	public String getCity() {
 		return city;
 	}
@@ -305,7 +304,7 @@ public class TallySupplier implements Serializable{
 	@Override
 	public String toString() {
 		return "TallySupplier [suppId=" + suppId + ", supplierName=" + supplierName + ", address=" + address
-				+ ", gstinNo=" + gstinNo + ", city=" + city + ", state=" + state + ", country=" + country + ", mobile1="
+				+ ", gstinNo=" + gstIn + ", city=" + city + ", state=" + state + ", country=" + country + ", mobile1="
 				+ mobile1 + ", mobile2=" + mobile2 + ", mobile3=" + mobile3 + ", phone1=" + phone1 + ", phone2="
 				+ phone2 + ", email1=" + email1 + ", email2=" + email2 + ", email3=" + email3 + ", email4=" + email4
 				+ ", email5=" + email5 + ", panNo=" + panNo + ", contactPrsn=" + contactPrsn + ", fdaLic=" + fdaLic
