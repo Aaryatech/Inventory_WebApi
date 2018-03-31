@@ -49,6 +49,9 @@ public class GrnGvnDetail {
 	
 	@Column(name = "total")
 	private float total;
+	
+	@Column(name = "expire_date")
+	private Date expireDate;
 
 	public int getGrnDetailId() {
 		return grnDetailId;
@@ -137,12 +140,21 @@ public class GrnGvnDetail {
 	public void setTotal(float total) {
 		this.total = total;
 	}
+	@JsonFormat(locale = "hi",timezone = "Asia/Kolkata", pattern = "dd-MM-yyyy")
+	public Date getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(Date expireDate) {
+		this.expireDate = expireDate;
+	}
 
 	@Override
 	public String toString() {
 		return "GrnGvnDetail [grnDetailId=" + grnDetailId + ", grnId=" + grnId + ", invoiceNo=" + invoiceNo
 				+ ", invoiceDate=" + invoiceDate + ", itemId=" + itemId + ", itemName=" + itemName + ", hsnCode="
-				+ hsnCode + ", batchNo=" + batchNo + ", rate=" + rate + ", qty=" + qty + ", total=" + total + "]";
+				+ hsnCode + ", batchNo=" + batchNo + ", rate=" + rate + ", qty=" + qty + ", total=" + total
+				+ ", expireDate=" + expireDate + "]";
 	}
 	
 	

@@ -36,7 +36,7 @@ public interface GrnListRepository extends JpaRepository<GrnList, Integer>{
 			"        and d.item_id=i.item_id  \r\n" + 
 			"        and h.supp_id=s.supp_id  \r\n" + 
 			"        and d.is_grn=0\r\n" + 
-			"        and d.expiry_date<=:currentDate",nativeQuery=true)
+			"        and d.expiry_date<=:currentDate and d.balance>0",nativeQuery=true)
 	GrnList getItemRecord(@Param("batchNo")String batchNo,@Param("suppId")int suppId,@Param("currentDate")String currentDate);
 
 	@Query(value="select\r\n" + 
@@ -64,7 +64,7 @@ public interface GrnListRepository extends JpaRepository<GrnList, Integer>{
 			"        and d.item_id=i.item_id  \r\n" + 
 			"        and h.supp_id=s.supp_id  \r\n" + 
 			"        and d.is_grn=0\r\n" + 
-			"        and d.expiry_date<=:currentDate",nativeQuery=true)
+			"        and d.expiry_date<=:currentDate and d.balance>0",nativeQuery=true)
 	List<GrnList> getallExpireItemSupllierWise(@Param("suppId")int suppId,@Param("currentDate")String currentDate);
 
 }

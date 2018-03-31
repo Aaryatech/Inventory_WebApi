@@ -101,6 +101,50 @@ public class GrnApiController {
 
 	}
 	
+	@RequestMapping(value = { "/getHistoryOfGrnGvn" }, method = RequestMethod.POST)
+	public @ResponseBody List<GrnGvnHeader> getHistoryOfGrnGvn(@RequestParam ("fromDate")String fromDate, @RequestParam ("toDate")String toDate)
+	{ 
+		
+		List<GrnGvnHeader> grnGvnHeaderList = new ArrayList<GrnGvnHeader>();
+		try {
+			  System.out.println("fromDate " + fromDate);
+			  System.out.println("toDate " + toDate);
+			grnGvnHeaderList = grnGvnHeaderRepository.findByGrnListByDate(fromDate,toDate);
+			 
+			System.out.println(grnGvnHeaderList.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return grnGvnHeaderList;
+
+	}
+	
+	@RequestMapping(value = { "/getGrnDetailByHeaderId" }, method = RequestMethod.POST)
+	public @ResponseBody GrnGvnHeader getGrnDetailByHeaderId(@RequestParam ("grnId")int grnId)
+	{ 
+		
+		GrnGvnHeader grnGvnHeader = new GrnGvnHeader();
+		try {
+			  
+			grnGvnHeader = grnGvnHeaderRepository.findByGrnId(grnId);
+			
+			List<GrnGvnDetail> grnGvnDetailList = grnGvnDetailRepository.findByGrnId(grnId);
+			grnGvnHeader.setGrnGvnDetailList(grnGvnDetailList);
+			 
+			System.out.println(grnGvnHeader.toString());
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+        
+		
+		return grnGvnHeader;
+
+	}
+	
 	 
 
 }
