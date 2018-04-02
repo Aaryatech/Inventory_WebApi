@@ -1,6 +1,6 @@
 package com.inventory.webapi.controller;
 
-import java.util.ArrayList;
+import java.util.ArrayList;import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController; 
 import com.inventory.webapi.model.PurchaseHeader;
 import com.inventory.webapi.model.TSetting;
+import com.inventory.webapi.model.UnpaidPurchaseBill;
 import com.inventory.webapi.model.Info;
 import com.inventory.webapi.model.PurchaseDetail;
 import com.inventory.webapi.repository.PurchaseDetailRepository;
 import com.inventory.webapi.repository.PurchaseHeaderRepository;
 import com.inventory.webapi.repository.TSettingRepository;
+import com.inventory.webapi.repository.UnpaidPurchaseBillRepository;
 
 @RestController
 public class PurchaseApiController {
@@ -29,6 +31,9 @@ public class PurchaseApiController {
 	
 	@Autowired
 	TSettingRepository tSettingRepository;
+	
+	@Autowired
+	UnpaidPurchaseBillRepository unpaidPurchaseBillRepository;
 	
 	@RequestMapping(value = { "/postPurchaseHeader" }, method = RequestMethod.POST)
 	public @ResponseBody PurchaseHeader postPurchaseHeader(@RequestBody PurchaseHeader purchaseHeader)
@@ -192,6 +197,50 @@ public class PurchaseApiController {
 		
 		return info;
 
+	}
+	
+	@RequestMapping(value = { "/unpaidPurchaseBillList" }, method = RequestMethod.POST)
+	public @ResponseBody  List<UnpaidPurchaseBill> unpaidPurchaseBillList(@RequestParam ("currentDate") String currentDate)
+	{
+		List<UnpaidPurchaseBill> unpaidPurchaseBillList = new ArrayList<UnpaidPurchaseBill>();
+	 
+		try {
+			unpaidPurchaseBillList = unpaidPurchaseBillRepository.unpaidPurchaseBillList(currentDate);
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+         return unpaidPurchaseBillList;
+	}
+	
+	@RequestMapping(value = { "/approvedIsPaidInPurchaseBill" }, method = RequestMethod.POST)
+	public @ResponseBody  Info approvedIsPaidInPurchaseBill(@RequestParam ("purchaseIdList") List<String> purchaseIdList)
+	{
+		Info info = new Info();
+	 
+		try {
+			int update=0;
+			
+			for(int i=0;i<purchaseIdList.size();i++)
+			{
+				int purchaseId = Integer.parseInt(purchaseIdList.get(i));
+				update = purchaseHeaderRepository.updateIsPaid(purchaseId);
+			}
+			
+			if(update==0)
+			{
+				info.setError(true);
+				info.setMessage("not update");
+			}
+				
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			info.setError(true);
+			info.setMessage("not update");
+		}
+         return info;
 	}
 
 }

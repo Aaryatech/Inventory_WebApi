@@ -123,6 +123,9 @@ public class PurchaseDetail {
 
 	@Column(name = "expiry_date")
 	private Date expiryDate;
+	
+	@Column(name = "replace_qty")
+	private int replaceQty;
 	 
 	public int getPurDetailId() {
 		return purDetailId;
@@ -405,6 +408,14 @@ public class PurchaseDetail {
 		this.expiryDate = expiryDate;
 	}
 
+	public int getReplaceQty() {
+		return replaceQty;
+	}
+
+	public void setReplaceQty(int replaceQty) {
+		this.replaceQty = replaceQty;
+	}
+
 	@Override
 	public String toString() {
 		return "PurchaseDetail [purDetailId=" + purDetailId + ", purchaseId=" + purchaseId + ", itemName=" + itemName
@@ -416,10 +427,10 @@ public class PurchaseDetail {
 				+ ", roundOff=" + roundOff + ", discOnBill=" + discOnBill + ", otherExtra=" + otherExtra + ", batchNo="
 				+ batchNo + ", sellQty=" + sellQty + ", balance=" + balance + ", rateWithoutTax=" + rateWithoutTax
 				+ ", rateWithTax=" + rateWithTax + ", wholesaleRate=" + wholesaleRate + ", retailRate=" + retailRate
-				+ ", delStatus=" + delStatus + "]";
+				+ ", delStatus=" + delStatus + ", expiryDate=" + expiryDate + ", replaceQty=" + replaceQty + "]";
 	}
-	
-	
+
+ 
 	
 
 }
