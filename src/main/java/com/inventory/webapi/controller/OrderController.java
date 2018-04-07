@@ -1,7 +1,10 @@
 package com.inventory.webapi.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,15 +35,27 @@ public class OrderController {
 	@Autowired
 	OrderHeaderRepository orderHeaderRepository;
 	//------------------------- Place Item Order---------------------------------
-	@RequestMapping(value = { "/placeOrder" }, method = RequestMethod.POST)
-	public @ResponseBody Order placeItemOrder(@RequestBody Order orderJson)
-			throws ParseException, JsonParseException, JsonMappingException, IOException {
+		@RequestMapping(value = { "/placeOrder" }, method = RequestMethod.POST)
+		public @ResponseBody Order placeItemOrder(@RequestBody Order orderJson)
+				throws ParseException, JsonParseException, JsonMappingException, IOException {
+			
+			Order jsonResult=null;
+			try {
+			
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Date date = new Date();
+			
+				orderJson.setOrderDate(new Date());
+			    orderJson.setOrderDatetime(dateFormat.format(date));
+			    jsonResult = orderService.placeOrder(orderJson);
 
-		Order jsonResult = orderService.placeOrder(orderJson);
-
-		return jsonResult;
-	}
-	//-----------------------------END-------------------------------------------
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+			return jsonResult;
+		}
+		//-----------------------------END-------------------------------------------
     //-----------------------------Get All Order Headers Between Dates-----------
 	@RequestMapping(value = { "/getOrderList" }, method = RequestMethod.POST)
 	public @ResponseBody List<GetOrder> getOrderList(@RequestParam("fromDate") String fromDate,@RequestParam("toDate") String toDate) {
@@ -61,7 +76,7 @@ public class OrderController {
 			return orderList;
 
 		}
-	//-------------------------------------END------------------------------------
+	//-------------------------------------END------grandTotal------------------------------
 	// -------------------------Get Order By Id--------------------------------
 	@RequestMapping(value = { "/getOrder" }, method = RequestMethod.POST)
 	public @ResponseBody GetOrder getOrder(@RequestParam("orderId")int orderId) {
