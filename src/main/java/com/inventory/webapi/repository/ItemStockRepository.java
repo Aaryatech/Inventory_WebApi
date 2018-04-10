@@ -14,7 +14,7 @@ public interface ItemStockRepository extends JpaRepository<ItemStock, Integer>{
 			+ " coalesce(t.retail_rate,0)as retail_rate, coalesce(t.rate_with_tax, 0) as rate_with_tax  FROM m_item "
 			+ "LEFT JOIN ( select t.item_id, t.item_name, t.wholesale_rate, t.retail_rate, t.rate_with_tax "
 			+ "from t_purchase_detail t inner join ( select item_id, max(pur_detail_id) as pur_detail_id, item_name,"
-			+ "wholesale_rate, retail_rate, rate_with_tax  from t_purchase_detail group by item_id  ) tm "
+			+ "wholesale_rate, retail_rate, rate_with_tax  from t_purchase_detail where del_status=0 group by item_id  ) tm "
 			+ " on t.item_id = tm.item_id  and t.pur_detail_id = tm.pur_detail_id ) t  ON m_item.item_id = t.item_id  "
 			+ "where m_item.del_status=0 group by m_item.item_id;",nativeQuery=true)
 	List<ItemStock> getFirstTimeItemStock();

@@ -14,7 +14,7 @@ public interface GetCurrentStockRepository extends JpaRepository<GetCurrentStock
 			+ "t_stock_header where t_stock_header.date=:date AND t_stock_header.stock_id=t_stock_detail.stock_id "
 			+ "AND m_item.item_id=t_stock_detail.item_id), 0) AS opening_stock, coalesce((Select SUM(t_purchase_detail.rec_qty) "
 			+ "FROM t_purchase_detail, t_purchase_header where t_purchase_header.date=:date AND t_purchase_header.purchase_id=t_purchase_detail.purchase_id "
-			+ " AND m_item.item_id=t_purchase_detail.item_id), 0) AS total_purchase, coalesce((Select SUM( t_bill_detail.bill_qty) "
+			+ " AND m_item.item_id=t_purchase_detail.item_id and t_purchase_detail.del_status=0), 0) AS total_purchase, coalesce((Select SUM( t_bill_detail.bill_qty) "
 			+ "FROM t_bill_header, t_bill_detail  WHERE t_bill_header.invoice_date =:date  AND t_bill_header.bill_no=t_bill_detail.bill_no"
 			+ " AND m_item.item_id=t_bill_detail.item_id),  0) AS total_sale, coalesce((Select SUM( grn_gvn_detail.qty) FROM "
 			+ "grn_gvn_detail, grn_gvn WHERE grn_gvn.date=:date  AND grn_gvn.grn_id=grn_gvn_detail.grn_id  AND m_item.item_id=grn_gvn_detail.item_id),"
